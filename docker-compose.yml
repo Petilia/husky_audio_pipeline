@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  yandex-speechkit:
+    build: ./asr_yaspeehkit
+    network_mode: host
+    command: python3 app.py
+    # ports:
+    #   - 8008:8008

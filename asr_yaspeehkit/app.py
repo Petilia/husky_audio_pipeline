@@ -7,6 +7,7 @@ from base64 import b64encode
 from speechkit_api import asr_from_yandex_speeckit, tts_from_yandex_speechkit
 
 app = FastAPI()
+load_dotenv()
 FOLDER_ID = os.getenv('FOLDER_ID')
 API_KEY = os.getenv('API_KEY')
 

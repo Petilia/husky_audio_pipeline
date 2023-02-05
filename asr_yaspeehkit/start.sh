@@ -17,7 +17,7 @@ desktop_start() {
         --device /dev/snd \
         --group-add=audio \
         -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-        -v $workspace_dir/:/home/appuser:rw \
+        -v $workspace_dir/:/home/appuser/src:rw \
         ${ARCH}/asr_speechkit:latest
     xhost -
 }

@@ -1,5 +1,0 @@
-[user]
-	email = petryashin.i.e@mail.ru
-	name = petili
-[credential]
-	helper = "!f() { /home/appuser/.vscode-server/bin/5235c6bb189b60b01b1f49062f4ffa42384f8c91/node /tmp/vscode-remote-containers-165bbdfbcbc1a269743c5b8c3476d23bdc7358c5.js $*; }; f"
