@@ -94,6 +94,12 @@ def get_asr(buffer, t_interval, RATE):
     end_timestamp = int(t_interval[1] * RATE)
     
     data = np.hstack((buffer))
-    sf.write(f"/home/docker_current/catkin_ws/src/vad_ros1/py_files/listen_node_wavs/{int(time.time())}.wav", 
+    
+    detected_ogg_path = f"/home/docker_current/catkin_ws/src/vad_ros1/py_files/listen_node_wavs/{int(time.time())}.ogg"
+    
+    sf.write(detected_ogg_path, 
              data[start_timestamp:end_timestamp], RATE)
+    
+    return detected_ogg_path
+    
     

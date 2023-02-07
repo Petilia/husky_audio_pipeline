@@ -1,0 +1,37 @@
+<launch>
+
+
+<!-- Параметры ASR -->
+<arg name="asr_host" default="0.0.0.0"/>
+<arg name="asr_port" default="4009"/>
+
+<!-- Параметры TTS -->
+<arg name="tts_host" default="0.0.0.0"/>
+<arg name="tts_port" default="4008"/>
+
+<!-- Параметры Dream -->
+<arg name="dream_host" default="0.0.0.0"/>
+
+
+  <!-- listen-node -->>
+  <node pkg="vad_ros1" name="listen_node" type="listen_node.py" output="screen">
+  </node>
+
+  <!-- vad-node -->>
+  <node pkg="vad_ros1" name="vad_node" type="vad_node.py">
+  </node>
+
+  <!-- asr-node -->>
+  <node pkg="vad_ros1" name="asr_node" type="asr_node.py" output="screen">
+    <param name="asr_host" value="$(arg asr_host)" />
+    <param name="asr_port" value="$(arg asr_port)"/>
+  </node>
+
+  <!-- tts-node -->>
+  <node pkg="vad_ros1" name="tts_node" type="tts_node.py" output="screen">
+    <param name="tts_host" value="$(arg tts_host)" />
+    <param name="tts_port" value="$(arg tts_port)"/>
+    <param name="dream_host" value="$(arg dream_host)"/>
+  </node>
+
+</launch>

@@ -21,11 +21,11 @@ def infer_asr(file: UploadFile = File(None)) -> JSONResponse:
     # ASR example:
     """
     ```Bash
-        curl -X POST "http://localhost:8008/asr"  -F 'file=@path/to/your/file.ogg'
+        curl -X POST "http://localhost:4008/asr" -F 'file=@path/to/your/file.ogg'
     ```
     
     ```Python
-    url = "http://localhost:8008/asr"
+    url = "http://localhost:4008/asr"
     files = {'file': open(tts_ogg_name, 'rb')}
     r = requests.post(url, files=files)
     r.text
@@ -34,7 +34,7 @@ def infer_asr(file: UploadFile = File(None)) -> JSONResponse:
     
     transcript = asr_from_yandex_speeckit(FOLDER_ID, API_KEY, file.file)
     print(transcript)
-  
+
     return JSONResponse(content={"transcript":transcript})
 
 
@@ -63,4 +63,4 @@ async def infer_tts(response: str = Form(...)) -> StreamingResponse:
 
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", port=8008, reload=True,)
+    uvicorn.run("app:app", port=4008, reload=True)

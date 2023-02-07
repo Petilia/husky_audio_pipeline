@@ -63,7 +63,11 @@ class VAD():
             if t_interval[1] is not None:
                 delta_t = t_interval[1] - t_interval[0]
                 print(f"delta_t = {delta_t}")
-                get_asr(self.buffer, t_interval, RATE)
+                detected_ogg_path = get_asr(self.buffer, t_interval, RATE)
+                ogg_msg = String()
+                ogg_msg.data = detected_ogg_path
+                self.pub_vad.publish(ogg_msg)
+                
             else:
                 print(f"delta_t = None")
             

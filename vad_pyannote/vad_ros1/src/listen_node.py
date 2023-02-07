@@ -13,6 +13,7 @@ CHANNELS = 1
 RATE = 16000
 TIMEOUT_LENGTH = 1
 INPUT_DEVICE_INDEX = get_device_index() # индекс устройства с которого будет идти запись звука 
+print(f"index device is {INPUT_DEVICE_INDEX}")
 
 real_n_seconds = int(RATE / CHUNK * N_SECONDS) * CHUNK / RATE
 print(f"real n seconds = {real_n_seconds}")
