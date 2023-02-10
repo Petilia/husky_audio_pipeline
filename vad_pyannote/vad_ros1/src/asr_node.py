@@ -16,8 +16,8 @@ class ASR():
         self.sub_vad = rospy.Subscriber('segmentation', String, self.on_asr, queue_size=1)
         self.pub_asr = rospy.Publisher('asr', String, queue_size=10)
         
-        asr_host = rospy.get_param('~asr_host')
-        asr_port = rospy.get_param('~asr_port')
+        asr_host = rospy.get_param('~asr_host', "10.147.18.193")
+        asr_port = rospy.get_param('~asr_port', "4009")
         self.url = f"http://{asr_host}:{asr_port}/asr"
         print(self.url)
         

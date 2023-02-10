@@ -7,3 +7,19 @@ services:
     command: python3 app.py
     # ports:
     #   - 8008:8008
+
+  ros-audio-pipeline:
+    build:
+      context: ./vad_pyannote/docker
+      dockerfile: Dockerfile.x86_64
+    network_mode: host
+    runtime: nvidia
+    command: bash run_nodes.bash
+    volumes:
+      - ./vad_pyannote/:/home/docker_current/catkin_ws/src/vad_ros1:rw 
+    devices:
+      - "/dev/snd"
+    group_add:
+        - audio
+    # ports:
+    #   - 8008:8008

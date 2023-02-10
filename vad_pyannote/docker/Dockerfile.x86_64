@@ -55,6 +55,9 @@ ARG PW=user
 
 RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | chpasswd && adduser ${USER} sudo
 WORKDIR /home/${USER}
+COPY run_nodes.bash . 
+RUN chmod +x run_nodes.bash
+
 RUN mkdir -p catkin_ws/src && chown -R ${UID}:${GID} /home/${USER}
 RUN chown -R ${UID}:${GID} /home
 USER ${UID}:${GID}

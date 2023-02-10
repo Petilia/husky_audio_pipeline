@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import rospy
+import time
 from std_msgs.msg import Int16MultiArray
-
 import pyaudio
 from pyaudio_tools import get_device_index
 import numpy as np
@@ -12,6 +12,9 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 16000
 TIMEOUT_LENGTH = 1
+
+
+time.sleep(2)
 INPUT_DEVICE_INDEX = get_device_index() # индекс устройства с которого будет идти запись звука 
 print(f"index device is {INPUT_DEVICE_INDEX}")
 

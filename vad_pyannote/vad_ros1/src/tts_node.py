@@ -7,11 +7,9 @@ import requests
 from pyaudio_tools import get_device_index, play_audio
 import time
 
-time.sleep(5)
-INPUT_DEVICE_INDEX = get_device_index() 
 # INPUT_DEVICE_INDEX = 12
-
-
+# time.sleep(1)
+INPUT_DEVICE_INDEX = get_device_index() 
 tts_ogg_name = '/home/docker_current/catkin_ws/src/vad_ros1/py_files/records/tts_result.ogg'
 
 class TTS():
@@ -25,6 +23,8 @@ class TTS():
 
         self.url = f"http://{tts_host}:{tts_port}/tts"
         self.dream_agent_url = f"http://{dream_host}:4242"
+
+        
         
     def on_tts(self, asr_msg: String):
         text = asr_msg.data
@@ -42,7 +42,9 @@ class TTS():
         with open(tts_ogg_name, 'wb') as f:
             f.write(response.content) 
             
+        print("before play")
         play_audio(tts_ogg_name, INPUT_DEVICE_INDEX)    
+        print("after play")
         
         
 def main():
