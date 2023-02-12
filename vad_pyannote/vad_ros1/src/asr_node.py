@@ -8,7 +8,6 @@ import requests
 # asr_host = rospy.get_param('~asr_host', '0.0.0.0')
 # asr_port = rospy.get_param('~asr_port', '4009')
 
-
 class ASR():
     def __init__(self):
         rospy.init_node('asr_node')

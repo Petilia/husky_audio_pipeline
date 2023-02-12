@@ -1,6 +1,5 @@
 <launch>
 
-
 <!-- Параметры ASR -->
 <!-- <arg name="asr_host" default="0.0.0.0"/> -->
 <arg name="asr_host" default="10.147.18.193"/>

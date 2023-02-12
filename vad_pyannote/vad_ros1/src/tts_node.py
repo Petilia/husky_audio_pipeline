@@ -6,9 +6,12 @@ import soundfile as sf
 import requests
 from pyaudio_tools import get_device_index, play_audio
 import time
+import uuid
 
 # INPUT_DEVICE_INDEX = 12
 # time.sleep(1)
+uniq_dream_id = str(uuid.uuid4())
+print(uniq_dream_id)
 INPUT_DEVICE_INDEX = get_device_index() 
 tts_ogg_name = '/home/docker_current/catkin_ws/src/vad_ros1/py_files/records/tts_result.ogg'
 
@@ -28,13 +31,14 @@ class TTS():
         
     def on_tts(self, asr_msg: String):
         text = asr_msg.data
-        print(text, type(text))
+        # print(text, type(text))
     
         #Отправка в Dream
-        dream_request = {"user_id": "xyz1", "payload": text}
+        dream_request = {"user_id": uniq_dream_id, "payload": text}
         r = requests.post(url=self.dream_agent_url, json=dream_request)
         dream_response = r.json()["response"]
-        print(dream_response)
+        print(f"Запрос в Dream: {text}")
+        print(f"Ответ Dream: {dream_response}")
         
         #Отправка в сервис tts
         files = {'response': (None, dream_response)}
