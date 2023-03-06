@@ -23,3 +23,12 @@ services:
         - audio
     # ports:
     #   - 8008:8008       
+
+  mongo:
+    command: mongod
+    image: mongo:4.0.0
+    ports:
+      - 27018:27017 # 27017 is allocated by Dream mongo
+    volumes:
+      - ./db_data:/data/db
+

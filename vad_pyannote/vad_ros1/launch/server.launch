@@ -1,5 +1,8 @@
 <launch>
 
+<!-- Параметры VAD -->
+<arg name="delta_t_thre" default="0.5"/>
+
 <!-- Параметры ASR -->
 <!-- <arg name="asr_host" default="0.0.0.0"/> -->
 <arg name="asr_host" default="10.147.18.193"/>
@@ -14,11 +17,12 @@
 
 
   <!-- listen-node -->>
-  <node pkg="vad_ros1" name="listen_node" type="listen_node.py" output="screen">
+  <node pkg="vad_ros1" name="listen_node" type="listen_node.py">
   </node>
 
   <!-- vad-node -->>
-  <node pkg="vad_ros1" name="vad_node" type="vad_node.py">
+  <node pkg="vad_ros1" name="vad_node" type="vad_node.py" output="screen">
+  <param name="delta_t_thre" value="$(arg delta_t_thre)" />
   </node>
 
   <!-- asr-node -->>

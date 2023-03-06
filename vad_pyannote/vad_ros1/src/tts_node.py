@@ -7,6 +7,11 @@ import requests
 from pyaudio_tools import get_device_index, play_audio
 import time
 import uuid
+import pymongo
+
+client = pymongo.MongoClient("mongodb://0.0.0.0:27018/")
+db = client["audio_annotation_db"]
+annotations = db["annotations"]
 
 # INPUT_DEVICE_INDEX = 12
 # time.sleep(1)
@@ -26,21 +31,22 @@ class TTS():
 
         self.url = f"http://{tts_host}:{tts_port}/tts"
         self.dream_agent_url = f"http://{dream_host}:4242"
+        
+        self.previous_audio_end = 0
 
         
         
     def on_tts(self, asr_msg: String):
-        text = asr_msg.data
-        # print(text, type(text))
-    
+        asr_result = asr_msg.data
+        
         #Отправка в Dream
-        dream_request = {"user_id": uniq_dream_id, "payload": text}
+        dream_request = {"user_id": uniq_dream_id, "payload": asr_result}
         r = requests.post(url=self.dream_agent_url, json=dream_request)
         dream_response = r.json()["response"]
-        print(f"Запрос в Dream: {text}")
+        print(f"Запрос в Dream: {asr_result}")
         print(f"Ответ Dream: {dream_response}")
         
-        #Отправка в сервис tts
+        # # #Отправка в сервис tts
         files = {'response': (None, dream_response)}
         response = requests.post(self.url, files=files)
         with open(tts_ogg_name, 'wb') as f:
@@ -49,6 +55,15 @@ class TTS():
         print("before play")
         play_audio(tts_ogg_name, INPUT_DEVICE_INDEX)    
         print("after play")
+        
+        #Отправка в  Mongo
+        annotation = { "asr_result": asr_result, 
+                      "dream_response": dream_response
+                            }
+        t0 = time.perf_counter()
+        annotations.insert_one(annotation)
+        dt = t0 = time.perf_counter() - t0
+        print("database latency = ", dt)
         
         
 def main():

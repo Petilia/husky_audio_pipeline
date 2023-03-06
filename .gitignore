@@ -4,6 +4,8 @@ asr_yaspeehkit/__pycache__
 *wav
 *pyc
 
+db_data/*
 # asr_yaspeehkit/*sh
 # asr_yaspeehkit/testing_speechkit.ipynb
 vad_pyannote/py_files/records_new.zip
+

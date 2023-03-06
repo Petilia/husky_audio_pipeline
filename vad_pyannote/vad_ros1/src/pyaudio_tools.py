@@ -24,7 +24,6 @@ def play_audio(filename, output_device_index, chunk=1024,
     if os.path.isfile(filename_wav):
         os.remove(filename_wav)
     
-    
     os.system(f"ffmpeg -i {filename} -ar 48000 {filename_wav}")
     
     wf = wave.open(filename_wav, 'rb')
